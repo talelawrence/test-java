@@ -1,0 +1,27 @@
+-- INSERT Survey 1: แบบ Rank
+INSERT INTO surveys (type, title) VALUES ('rank', 'จากการใช้งาน TTB Touch ท่านพึงพอใจระดับใด');
+
+INSERT INTO survey_settings (survey_id, "key", "value") VALUES
+((SELECT MAX(id) FROM surveys), 'require', 'true'),
+((SELECT MAX(id) FROM surveys), 'min', '1'),
+((SELECT MAX(id) FROM surveys), 'max', '5'),
+((SELECT MAX(id) FROM surveys), 'min_title', '1 คือไม่พอใจมาก'),
+((SELECT MAX(id) FROM surveys), 'max_title', '5 คือพอใจมาก');
+
+-- INSERT Survey 2: แบบ Radio
+INSERT INTO surveys (type, title) VALUES ('radio', 'หัวข้อไหนของ TTB Touch ที่ท่านคิดว่าควรปรับปรุงมากที่สุด');
+
+INSERT INTO survey_settings (survey_id, "key", "value") VALUES
+((SELECT MAX(id) FROM surveys), 'require', 'true');
+
+INSERT INTO survey_choices (survey_id, title, "value") VALUES
+((SELECT MAX(id) FROM surveys), 'ความเร็วในการเปิด', '1'),
+((SELECT MAX(id) FROM surveys), 'การค้นหาเมนูที่ใช้บ่อย', '2'),
+((SELECT MAX(id) FROM surveys), 'การถอนเงินโดยไม่ใช้บัตร', '3');
+
+-- INSERT Survey 3: แบบ Text
+INSERT INTO surveys (type, title) VALUES ('text', 'คำแนะนำอื่นๆ');
+
+INSERT INTO survey_settings (survey_id, "key", "value") VALUES
+((SELECT MAX(id) FROM surveys), 'max_length', '100'),
+((SELECT MAX(id) FROM surveys), 'require', 'false');
